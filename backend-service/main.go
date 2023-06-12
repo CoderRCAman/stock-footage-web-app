@@ -64,11 +64,11 @@ func main() {
 		Root:   http.Dir("./../storage/videos/private/"),
 		Browse: true,
 	}))
-	app.Use("/api/free/image/", middlewareRef.IsAuthenticated, middlewareRef.IsAllowedDownload, filesystem.New(filesystem.Config{
+	app.Use("/api/free/image/", middlewareRef.IsAuthenticated, filesystem.New(filesystem.Config{
 		Root:   http.Dir("./../storage/images/public/"),
 		Browse: true,
 	}))
-	app.Use("/api/free/footage/", middlewareRef.IsAuthenticated, middlewareRef.IsAllowedDownload, filesystem.New(filesystem.Config{
+	app.Use("/api/free/footage/", middlewareRef.IsAuthenticated, filesystem.New(filesystem.Config{
 		Root:   http.Dir("./../storage/videos/public/"),
 		Browse: true,
 	}))
