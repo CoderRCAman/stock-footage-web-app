@@ -1,0 +1,17 @@
+{
+  "name": "block-nsfw-service",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@tensorflow/tfjs-node": "^4.6.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.22",
+    "nsfwjs": "^2.4.2"
+  },
+  "scripts": {
+    "dev": "nodemon index.js"
+  }
+}
