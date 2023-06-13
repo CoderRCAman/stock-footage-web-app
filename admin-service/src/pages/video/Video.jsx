@@ -41,10 +41,7 @@ export default function Video() {
                       <tr className="bg-gray-800">
                         <td className="p-3">
                           <div className="flex align-items-center ">
-                            <video>
-                              <source src={""} />
-                            </video>
-                            <div className="ml-3 flex justify-center ">
+                            <div className="ml-3 flex justify-start">
                               <div className="">{u.title}</div>
                             </div>
                           </div>
