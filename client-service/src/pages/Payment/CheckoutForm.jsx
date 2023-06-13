@@ -110,7 +110,7 @@ export default function CheckoutForm() {
         />
         <PaymentElement id="payment-element" options={paymentElementOptions} />
         <button disabled={isLoading || !stripe || !elements} id="submit">
-          <span id="button-text">
+          <span id="button-text" className="btn btn-success">
             {isLoading ? (
               <div className="spinner" id="spinner"></div>
             ) : (

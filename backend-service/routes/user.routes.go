@@ -19,4 +19,8 @@ func (r *Routes) UserRoutes() {
 	r.app.Get("/api/v1/user/images", r.m.IsAuthenticated, r.controller.GetImages)
 	r.app.Get("/api/v1/user/videos", r.m.IsAuthenticated, r.controller.GetVideos)
 	r.app.Patch("/api/v1/user/update", r.m.IsAuthenticated, r.controller.EditProfile)
+	r.app.Get("/api/v1/user/all-transaction", r.m.IsAuthenticated, r.m.IsAdmin, r.controller.GetAllTransactions)
+	r.app.Get("/api/v1/user/all-users", r.m.IsAuthenticated, r.m.IsAdmin, r.controller.GetAllUsers)
+	r.app.Get("/api/v1/user/all-photos", r.m.IsAuthenticated, r.m.IsAdmin, r.controller.GetAllPhoto)
+	r.app.Get("/api/v1/user/all-video", r.m.IsAuthenticated, r.m.IsAdmin, r.controller.GetAllVideos)
 }

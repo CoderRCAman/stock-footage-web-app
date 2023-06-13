@@ -2,8 +2,6 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { fail, success } from "../components/Snackbar/Snackbar";
-import { Sleep } from "../utils/auth";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -24,15 +22,18 @@ export default function Login() {
       );
 
       if (res.status == 200) {
-        localStorage.setItem("auth", res.data.auth);
-        localStorage.setItem("id", res.data.id);
-        localStorage.setItem("role", res.data.role);
-        success("Logged in");
-        await Sleep(1000);
-        window.location.reload();
+        if (res.data.role == "admin") {
+          localStorage.setItem("auth", res.data.auth);
+          localStorage.setItem("id", res.data.id);
+          localStorage.setItem("role", res.data.role);
+          alert("logged in");
+          window.location.reload();
+        } else {
+          alert("not an admin");
+        }
       }
     } catch (error) {
-      fail(error?.response.data.msg || error?.message);
+      alert(error?.response?.data?.msg || error?.message);
     }
   };
   return (
@@ -78,16 +79,7 @@ export default function Login() {
           <button className="font-Geologica text-xl bg-purple-400 hover:bg-purple-500 p-2 rounded-full text-white">
             Login
           </button>
-          <div>
-            
-          </div>
-          <div>
-            <Link to="/signup">
-              <h1 className="text-purple-800 font-semibold">
-                Don't have an account?
-              </h1>
-            </Link>
-          </div>
+          <div></div>
         </form>
       </div>
     </div>

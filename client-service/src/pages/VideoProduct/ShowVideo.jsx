@@ -33,7 +33,7 @@ export default function ShowVideo() {
             <DownloadOutlined />
             Download
           </button>
-          {state.license=="std" && (
+          {state.license=="std " && (
             <div className="p-2 text-sm font-semibold text-center">
               To download this premium footage requires{" "}
               <span className="border-[1px] ml-2 border-slate-600 rounded-md text-orange-600 px-2">

@@ -10,4 +10,5 @@ func (r *Routes) UploadRoutes() {
 	r.app.Get("/api/v1/file/search/videos/", r.controller.SearchVideo)
 	r.app.Delete("/api/v1/file/delete/:id", r.m.IsAuthenticated, r.controller.DeleteFootage)
 	r.app.Patch("/api/v1/file/edit/:id", r.m.IsAuthenticated, r.controller.EditFootage)
+
 }

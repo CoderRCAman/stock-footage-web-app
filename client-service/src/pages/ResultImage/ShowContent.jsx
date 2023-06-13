@@ -15,7 +15,7 @@ export default function ShowContent() {
   const categoryId = urlParams.get("id" || "");
   const [images, setImages] = useState({
     page: 1,
-    limit: 2,
+    limit: 15,
     images: [],
     loading: false,
   });

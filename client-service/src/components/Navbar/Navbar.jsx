@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { isAuthenticated, logout } from "../../utils/auth";
+import { useSelector } from "react-redux";
 
 export default function Navbar() {
+  const user = useSelector((state) => state.user);
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -40,9 +42,13 @@ export default function Navbar() {
           {isAuthenticated() && (
             <div className="dropdown dropdown-end ">
               <div tabIndex={0} className="avatar ">
-                <div className="w-8 rounded-full cursor-pointer">
+                <div className="w-12 rounded-full cursor-pointer">
                   <img
-                    src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                  className="object-cover aspect-auto"
+                    src={
+                      user?.avatar ||
+                      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                    }
                     alt="Tailwind-CSS-Avatar-component"
                   />
                 </div>

@@ -15,18 +15,20 @@ export default function UploadModal() {
             onChange={(e) => setType(e.target.value)}
             className="select select-secondary w-full max-w-xs mt-3"
           >
-            <option disabled value={'Choose Footage Type'} selected>
+            <option disabled value={"Choose Footage Type"} selected>
               Choose Footage type
             </option>
-            <option value={'Videos'}>Videos</option>
-            <option value={'Images'}>Images</option>
+            <option value={"Videos"}>Videos</option>
+            <option value={"Images"}>Images</option>
           </select>
-          {type == "Videos" && <VideoUpload /> }
-          {type == "Images" && <ImageUpload /> }
+          {type == "Videos" && <VideoUpload />}
+          {type == "Images" && <ImageUpload />}
 
           <div className="modal-action">
             {/* if there is a button in form, it will close the modal */}
-            <button onClick={()=>window.my_modal_1.close()} className="btn">Close</button>
+            <button onClick={() => window.location.reload()} className="btn">
+              Close
+            </button>
           </div>
         </div>
       </dialog>

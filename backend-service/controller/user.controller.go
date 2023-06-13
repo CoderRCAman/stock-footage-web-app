@@ -1110,3 +1110,119 @@ func (c *Controller) EditProfile(res *fiber.Ctx) error {
 		"msg": "Updated successfully!",
 	})
 }
+
+func (c *Controller) GetAllUsers(res *fiber.Ctx) error {
+	col := c.DB.Database("test").Collection("user")
+	var user []bson.M
+	cursor, err := col.Find(context.TODO(), bson.D{{}})
+	if err != nil {
+		return res.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"msg": "couldnot find any user",
+		})
+	}
+
+	if err := cursor.All(context.TODO(), &user); err != nil {
+		return res.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"msg": "Failed to load data",
+		})
+	}
+	return res.JSON(user)
+}
+func (c *Controller) GetAllPhoto(res *fiber.Ctx) error {
+	col := c.DB.Database("test").Collection("file")
+	var user []bson.M
+	cursor, err := col.Find(context.TODO(), bson.D{{
+		Key:   "type",
+		Value: "image",
+	}})
+	if err != nil {
+		return res.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"msg": "couldnot find any user",
+		})
+	}
+
+	if err := cursor.All(context.TODO(), &user); err != nil {
+		return res.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"msg": "Failed to load data",
+		})
+	}
+	return res.JSON(user)
+}
+func (c *Controller) GetAllVideos(res *fiber.Ctx) error {
+	col := c.DB.Database("test").Collection("file")
+	var user []bson.M
+	cursor, err := col.Find(context.TODO(), bson.D{{
+		Key:   "type",
+		Value: "video",
+	}})
+	if err != nil {
+		return res.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"msg": "couldnot find any user",
+		})
+	}
+
+	if err := cursor.All(context.TODO(), &user); err != nil {
+		return res.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"msg": "Failed to load data",
+		})
+	}
+	return res.JSON(user)
+}
+func (c *Controller) GetAllTransactions(res *fiber.Ctx) error {
+	col := c.DB.Database("test").Collection("payment")
+	var user []bson.M
+	opts := options.Aggregate().SetMaxTime(2 * time.Second)
+	cursor, err := col.Aggregate(context.TODO(), mongo.Pipeline{
+		bson.D{
+			{
+				Key: "$match",
+				Value: bson.D{{
+					Key:   "status",
+					Value: true,
+				}},
+			},
+		},
+		bson.D{
+			{
+				Key: "$lookup",
+				Value: bson.D{
+					{
+						Key:   "from",
+						Value: "user",
+					},
+					{
+						Key:   "localField",
+						Value: "user",
+					},
+					{
+						Key:   "foreignField",
+						Value: "_id",
+					},
+					{
+						Key:   "as",
+						Value: "user",
+					},
+				},
+			},
+		},
+		bson.D{{
+			Key: "$sort",
+			Value: bson.D{{
+				Key:   "createdAt",
+				Value: -1,
+			}},
+		}},
+	}, opts)
+	if err != nil {
+		return res.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"msg": "couldnot find any user",
+		})
+	}
+
+	if err := cursor.All(context.TODO(), &user); err != nil {
+		return res.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"msg": "Failed to load data",
+		})
+	}
+	return res.JSON(user)
+}

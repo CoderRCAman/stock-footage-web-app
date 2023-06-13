@@ -38,7 +38,7 @@ func (m *Middleware) IsAuthenticated(c *fiber.Ctx) error {
 }
 func (m *Middleware) IsAdmin(c *fiber.Ctx) error {
 	role := c.Cookies("role")
-	if role != "admin" {
+	if role == "admin" {
 		return c.Next()
 	}
 	return c.Status(fiber.StatusForbidden).JSON(fiber.Map{

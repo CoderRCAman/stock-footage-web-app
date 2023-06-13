@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import SelectType from "./SelectType";
+import { SearchOutlined } from "@ant-design/icons";
 
 export default function Search() {
   const [selected, setSelected] = useState("images");
@@ -29,7 +30,10 @@ export default function Search() {
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
           className="w-full outline-none px-4 font-Montserrat  border-slate-700"
-        />
+        /> 
+        <button className="flex items-center bg-neutral-700 p-2">
+          <SearchOutlined className="text-2xl" />
+        </button>
       </form>
     </div>
   );

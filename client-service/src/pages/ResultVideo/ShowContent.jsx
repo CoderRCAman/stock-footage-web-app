@@ -16,7 +16,7 @@ export default function ShowContent() {
   const categoryId = urlParams.get("id" || "");
   const [videos, setVideos] = useState({
     page: 1,
-    limit: 2,
+    limit: 15,
     videos: [],
     count: 0,
     loading: false,
